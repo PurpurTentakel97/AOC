@@ -22,10 +22,10 @@ int get_int_input(std::string const& message) {
 			input = std::stoi(input_str);
 			valid_input = true;
 		}
-		catch (std::invalid_argument const& e) {
+		catch (std::invalid_argument const&) {
 			print(PrintType::NONE, "invalid input. try again");
 		}
-		catch (std::out_of_range const& e) {
+		catch (std::out_of_range const&) {
 			print(PrintType::NONE, "value to big");
 		}
 	}

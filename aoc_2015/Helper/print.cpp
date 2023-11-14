@@ -6,7 +6,7 @@
 #include "print.hpp"
 #include <iostream>
 
-std::string const& type_to_string(PrintType type) {
+std::string type_to_string(PrintType type) {
     switch (type) {
     case PrintType::NONE:
         return "";

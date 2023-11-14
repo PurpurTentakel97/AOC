@@ -14,6 +14,6 @@ enum class PrintType {
 	NONE,
 };
 
-[[nodiscard]] std::string const& type_to_string(PrintType type);
+[[nodiscard]] std::string type_to_string(PrintType type);
 
 void print(PrintType type, std::string const& message);
