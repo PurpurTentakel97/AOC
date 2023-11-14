@@ -27,6 +27,9 @@
     <ClCompile Include="day_01\day_01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Helper\load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\input.hpp">
@@ -41,5 +44,11 @@
     <ClInclude Include="days.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Helper\load.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="day_01\input_1.txt" />
   </ItemGroup>
 </Project>
