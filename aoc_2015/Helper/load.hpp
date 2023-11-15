@@ -7,4 +7,5 @@
 
 #include <string>
 
+
 std::string load(std::string const& file);

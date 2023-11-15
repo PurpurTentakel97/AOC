@@ -7,6 +7,7 @@
 
 #include <string>
 
+
 enum class PrintType {
 	DEBUG,
 	INFO,

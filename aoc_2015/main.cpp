@@ -9,15 +9,16 @@
 #include <unordered_map>
 #include <functional>
 
+static inline std::unordered_map<int, std::function<void()>> map{
+	{ 1 , day_01 },
+	{ 2 , day_02 },
+};
+
 int main() { 
 	auto running{ true };
 
-	std::unordered_map<int, std::function<void()>> map{
-		{ 1 , day_01 },
-	};
-
 	while(running) {
-		auto input{ get_int_input("choose a day | 0 exists the app.") };
+		auto const input{ get_int_input("choose a day | 0 exists the app.") };
 		if (map.contains(input)) {
 			map[input]();
 		}

@@ -6,7 +6,7 @@
 #include "print.hpp"
 #include <iostream>
 
-std::string type_to_string(PrintType type) {
+std::string type_to_string(PrintType const type) {
     switch (type) {
     case PrintType::NONE:
         return "";
@@ -22,7 +22,7 @@ std::string type_to_string(PrintType type) {
     }
 }
 
-void print(PrintType type, std::string const& message) {
+void print(PrintType const type, std::string const& message) {
     if (type == PrintType::NONE) {
         std::cout << message << '\n';
         return;

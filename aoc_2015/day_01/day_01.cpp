@@ -9,9 +9,10 @@
 #include <unordered_map>
 #include <cctype>
 
-static char add{ '(' };
-static char sub{ ')' };
-static std::unordered_map<char, int> operation{
+
+static constexpr char add{ '(' };
+static constexpr char sub{ ')' };
+static inline std::unordered_map<char, int> operation{
 	{ add,  1 },
 	{ sub, -1 },
 };
@@ -20,7 +21,7 @@ void day_01() {
 	print(PrintType::INFO, "day one called");
 	print(PrintType::INFO, "first riddle:");
 
-	auto input{ load("input\\input_1_1.txt") };
+	auto const input{ load("input\\input_1_1.txt") };
 	auto count{ 0 };
 	auto pos{ 0 };
 	auto found{ false };
