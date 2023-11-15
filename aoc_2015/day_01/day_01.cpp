@@ -19,7 +19,6 @@ static inline std::unordered_map<char, int> operation{
 
 void day_01() {
 	print(PrintType::INFO, "day one called");
-	print(PrintType::INFO, "first riddle:");
 
 	auto const input{ load("input\\input_1_1.txt") };
 	auto count{ 0 };

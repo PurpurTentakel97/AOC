@@ -30,6 +30,9 @@
     <ClCompile Include="Helper\load.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="day_02\day_02.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\input.hpp">
@@ -45,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Helper\load.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="day_02\day_02.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\types.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

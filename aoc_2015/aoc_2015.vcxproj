@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="day_01\day_01.cpp" />
+    <ClCompile Include="day_02\day_02.cpp" />
     <ClCompile Include="Helper\input.cpp" />
     <ClCompile Include="Helper\load.cpp" />
     <ClCompile Include="Helper\print.cpp" />
@@ -144,9 +145,11 @@
   <ItemGroup>
     <ClInclude Include="days.hpp" />
     <ClInclude Include="day_01\day_01.hpp" />
+    <ClInclude Include="day_02\day_02.hpp" />
     <ClInclude Include="Helper\input.hpp" />
     <ClInclude Include="Helper\load.hpp" />
     <ClInclude Include="Helper\print.hpp" />
+    <ClInclude Include="Helper\types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input\input_1_1.txt" />
