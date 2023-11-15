@@ -11,6 +11,7 @@ enum class PrintType {
 	DEBUG,
 	INFO,
 	ERROR,
+	RESULT,
 	NONE,
 };
 

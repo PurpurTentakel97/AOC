@@ -14,6 +14,8 @@ std::string type_to_string(PrintType type) {
         return "[INFO]";
     case PrintType::DEBUG:
         return "[DEBUG]";
+    case PrintType::RESULT:
+        return "[RESULT]";
     case PrintType::ERROR:
     default:
         return "[ERROR]";

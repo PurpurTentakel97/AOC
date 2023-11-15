@@ -49,6 +49,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="day_01\input_1.txt" />
+    <Text Include="input\input_1_1.txt" />
   </ItemGroup>
 </Project>
