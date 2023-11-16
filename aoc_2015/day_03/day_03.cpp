@@ -36,7 +36,7 @@ struct Point final {
 
 	for (auto const& c : input) {
 		if (std::isspace(c)) {
-			hlp::print(hlp::PrintType::INFO, "whitespace found -> ignoring");
+			hlp::print_whitespace_ignore();
 			continue;
 		}
 		switch (c) {
@@ -53,7 +53,7 @@ struct Point final {
 				--current.y;
 				break;
 			default:
-				hlp::print(hlp::PrintType::ERROR, "unexpected token found : " + c);
+				hlp::print_unexcepted_character(c);
 				continue;
 		}
 
@@ -71,7 +71,7 @@ struct Point final {
 
 	for (auto const& c : input) {
 		if (std::isspace(c)) {
-			hlp::print(hlp::PrintType::INFO, "whitespace found -> ignored");
+			hlp::print_whitespace_ignore();
 			continue;
 		}
 
@@ -91,7 +91,7 @@ struct Point final {
 				--dummy->y;
 				break;
 			default:
-				hlp::print(hlp::PrintType::ERROR, "unexpected token: " + c);
+				hlp::print_unexcepted_character(c);
 				continue;
 		}
 

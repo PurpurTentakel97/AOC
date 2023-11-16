@@ -19,6 +19,10 @@ namespace hlp {
                 return "[RESULT]";
             case PrintType::CALL:
                 return "[CALL]";
+            case PrintType::INPUT:
+                return "[INPUT]";
+            case PrintType::QUIT:
+                return "[QUIT]";
             case PrintType::ERROR:
                 return "[ERROR]";
         }
@@ -34,6 +38,14 @@ namespace hlp {
     }
 
     void print_day(int n) {
-        std::cout << type_to_string(PrintType::CALL) << " day " << std::to_string(n) << '\n';
+        print(PrintType::CALL, "day " + std::to_string(n));
+    }
+
+    void print_whitespace_ignore() { 
+        print(PrintType::INFO, "whitespace found -> ignored");
+    }
+
+    void print_unexcepted_character(char c) {
+        print(PrintType::ERROR, "unexpected character: " + c);
     }
 }

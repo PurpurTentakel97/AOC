@@ -9,7 +9,7 @@
 
 namespace hlp {
 	int get_int_input(std::string const& message) {
-		print(PrintType::NONE, message);
+		print(PrintType::INPUT, message);
 
 		auto valid_input{ false };
 		int input;
@@ -23,10 +23,10 @@ namespace hlp {
 				valid_input = true;
 			}
 			catch (std::invalid_argument const&) {
-				print(PrintType::NONE, "invalid input. try again");
+				print(PrintType::ERROR, "invalid input. try again");
 			}
 			catch (std::out_of_range const&) {
-				print(PrintType::NONE, "value to big");
+				print(PrintType::ERROR, "value to big");
 			}
 		}
 

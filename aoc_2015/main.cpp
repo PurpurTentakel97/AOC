@@ -24,11 +24,11 @@ int main() {
 			map[input]();
 		}
 		else if (input == 0) {
-			hlp::print(hlp::PrintType::NONE, "0. exit app");
+			hlp::print(hlp::PrintType::QUIT, "0. exit app");
 			running = false;
 		}
 		else {
-			hlp::print(hlp::PrintType::NONE, "input out of range");
+			hlp::print(hlp::PrintType::ERROR, "day not existing");
 		}
 	}
 }

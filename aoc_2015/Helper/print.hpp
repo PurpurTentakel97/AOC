@@ -14,6 +14,8 @@ namespace hlp {
 		ERROR,
 		RESULT,
 		CALL,
+		INPUT,
+		QUIT,
 		NONE,
 	};
 
@@ -22,4 +24,8 @@ namespace hlp {
 	void print(PrintType type, std::string const& message);
 
 	void print_day(int n);
+
+	void print_whitespace_ignore();
+
+	void print_unexcepted_character(char c);
 }
