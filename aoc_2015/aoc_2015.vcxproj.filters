@@ -30,6 +30,15 @@
     <ClCompile Include="Helper\load.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="day_02\day_02.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\convert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helper\input.hpp">
@@ -47,8 +56,21 @@
     <ClInclude Include="Helper\load.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="day_02\day_02.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\types.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper\convert.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input\input_1_1.txt" />
+    <Text Include="input\input_01_1.txt" />
+    <Text Include="input\input_02_1.txt" />
   </ItemGroup>
 </Project>

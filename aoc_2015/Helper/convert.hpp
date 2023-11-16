@@ -5,8 +5,9 @@
 
 #pragma once
 
+#include "types.hpp"
 #include <string>
 
 namespace hlp {
-	[[nodiscard]] int get_int_input(std::string const& message);
+	[[nodiscard]] int st_to_i(std::string const& s);
 }
