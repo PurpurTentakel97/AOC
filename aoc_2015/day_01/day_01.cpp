@@ -20,7 +20,7 @@ static inline std::unordered_map<char, int> operation{
 void day_01() {
 	print(PrintType::INFO, "day one called");
 
-	auto const input{ load("input\\input_1_1.txt") };
+	auto const input{ load("input\\input_01_1.txt") };
 	auto count{ 0 };
 	auto pos{ 0 };
 	auto found{ false };

@@ -28,10 +28,10 @@ static struct Package final {
 void day_02() {
 	print(PrintType::INFO, "day two called");
 	auto const input{ load("input\\input_02_1.txt") };
-	auto const pcks{ parse(input) };
+	auto const packs{ parse(input) };
 
 	usize surface{ 0 };
-	for (auto const& pck : pcks) {
+	for (auto const& pck : packs) {
 		surface += surface_plus_extra(pck);
 	}
 
