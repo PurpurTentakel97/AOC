@@ -30,9 +30,9 @@ struct Point final {
 	}
 };
 
-[[nodiscard]] static inline std::vector<Point> parse(std::string const& input) {
-	std::vector<Point> points{ };
+[[nodiscard]] static inline std::vector<Point> parse_one(std::string const& input) {
 	Point current{ 0, 0 };
+	std::vector<Point> points{ current };
 
 	for (auto const& c : input) {
 		if (std::isspace(c)) {
@@ -63,6 +63,46 @@ struct Point final {
 	return points;
 }
 
+[[nodiscard]] static inline std::vector<Point> parse_two(std::string const& input) {
+	Point santa{ 0,0 };
+	Point santa_robot{ 0,0 };
+	std::vector<Point> points{ santa };
+	auto count{ 0 };
+
+	for (auto const& c : input) {
+		if (std::isspace(c)) {
+			hlp::print(hlp::PrintType::INFO, "whitespace found -> ignored");
+			continue;
+		}
+
+		Point* const dummy{ count % 2 == 0 ? &santa : &santa_robot };
+
+		switch (c) {
+			case up:
+				++dummy->x;
+				break;
+			case down:
+				--dummy->x;
+				break;
+			case right:
+				++dummy->y;
+				break;
+			case left:
+				--dummy->y;
+				break;
+			default:
+				hlp::print(hlp::PrintType::ERROR, "unexpected token: " + c);
+				continue;
+		}
+
+		++count;
+		points.push_back(*dummy);
+	}
+
+	return points;
+
+}
+
 [[nodiscard]] static inline std::set<Point> unique_points(std::vector<Point> points) {
 	std::set<Point> u_points{ };
 
@@ -77,8 +117,12 @@ void day_03() {
 	hlp::print_day(3);
 	auto const input{ hlp::load("input\\input_03_1.txt") };
 
-	auto const points{ parse(input) };
-	auto const u_points{ unique_points(points) };
+	auto const santa_points{ parse_one(input) };
+	auto const u_santa_points{ unique_points(santa_points) };
 
-	hlp::print(hlp::PrintType::RESULT, "house count with min one present: " + std::to_string(u_points.size()));
+	auto const robot_points{ parse_two(input) };
+	auto const u_robot_points{ unique_points(robot_points) };
+
+	hlp::print(hlp::PrintType::RESULT, "house count with min one present: " + std::to_string(u_santa_points.size()));
+	hlp::print(hlp::PrintType::RESULT, "house count with min one present with robot Santa: " + std::to_string(u_robot_points.size()));
 }
