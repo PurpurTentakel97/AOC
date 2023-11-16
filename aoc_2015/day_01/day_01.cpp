@@ -18,9 +18,9 @@ static inline std::unordered_map<char, int> operation{
 };
 
 void day_01() {
-	print(PrintType::INFO, "day one called");
+	hlp::print(hlp::PrintType::INFO, "day one called");
 
-	auto const input{ load("input\\input_01_1.txt") };
+	auto const input{ hlp::load("input\\input_01_1.txt") };
 	auto count{ 0 };
 	auto pos{ 0 };
 	auto found{ false };
@@ -28,7 +28,7 @@ void day_01() {
 	for (auto const& c : input) {
 		if (std::isspace(c)) { continue; }
 		if (not operation.contains(c)) {
-			print(PrintType::ERROR, "unexpected character: " + c);
+			hlp::print(hlp::PrintType::ERROR, "unexpected character: " + c);
 			continue;
 		}
 
@@ -41,6 +41,6 @@ void day_01() {
 		}
 	}
 
-	print(PrintType::RESULT, "final count: " + std::to_string(count));
-	print(PrintType::RESULT, "first position smaller than 0: " + std::to_string(pos));
+	hlp::print(hlp::PrintType::RESULT, "final count: " + std::to_string(count));
+	hlp::print(hlp::PrintType::RESULT, "first position smaller than 0: " + std::to_string(pos));
 }

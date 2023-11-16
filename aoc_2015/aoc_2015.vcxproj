@@ -140,6 +140,7 @@
     <ClCompile Include="Helper\input.cpp" />
     <ClCompile Include="Helper\load.cpp" />
     <ClCompile Include="Helper\print.cpp" />
+    <ClCompile Include="Helper\string.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,10 +150,12 @@
     <ClInclude Include="Helper\input.hpp" />
     <ClInclude Include="Helper\load.hpp" />
     <ClInclude Include="Helper\print.hpp" />
+    <ClInclude Include="Helper\string.hpp" />
     <ClInclude Include="Helper\types.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input\input_1_1.txt" />
+    <Text Include="input\input_01_1.txt" />
+    <Text Include="input\input_02_1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

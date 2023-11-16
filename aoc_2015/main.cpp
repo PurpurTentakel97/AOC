@@ -18,16 +18,16 @@ int main() {
 	auto running{ true };
 
 	while(running) {
-		auto const input{ get_int_input("choose a day | 0 exists the app.") };
+		auto const input{ hlp::get_int_input("choose a day | 0 exists the app.") };
 		if (map.contains(input)) {
 			map[input]();
 		}
 		else if (input == 0) {
-			print(PrintType::NONE, "0. exit app");
+			hlp::print(hlp::PrintType::NONE, "0. exit app");
 			running = false;
 		}
 		else {
-			print(PrintType::NONE, "input out of range");
+			hlp::print(hlp::PrintType::NONE, "input out of range");
 		}
 	}
 }
