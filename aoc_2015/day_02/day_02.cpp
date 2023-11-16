@@ -65,7 +65,7 @@ struct Package final {
 }
 
 void day_02() {
-	hlp::print(hlp::PrintType::INFO, "day two called");
+	hlp::print_day(2);
 	auto const input{ hlp::load("input\\input_02_1.txt") };
 	auto const packs{ parse(input) };
 

@@ -18,7 +18,7 @@ static inline std::unordered_map<char, int> operation{
 };
 
 void day_01() {
-	hlp::print(hlp::PrintType::INFO, "day one called");
+	hlp::print_day(1);
 
 	auto const input{ hlp::load("input\\input_01_1.txt") };
 	auto count{ 0 };

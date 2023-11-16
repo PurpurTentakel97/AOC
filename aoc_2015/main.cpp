@@ -10,8 +10,9 @@
 #include <functional>
 
 static inline std::unordered_map<int, std::function<void()>> map{
-	{ 1 , day_01 },
-	{ 2 , day_02 },
+	{  1, day_01 },
+	{  2, day_02 },
+	{  3, day_03 },
 };
 
 int main() { 
