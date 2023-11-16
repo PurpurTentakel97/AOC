@@ -8,4 +8,6 @@
 #include <vector>
 #include <string>
 
-[[nodiscard]] std::vector<std::string> delimiter(char delitier);
+namespace hlp {
+	[[nodiscard]] std::vector<std::string> split(std::stringstream entry, char delimiter);
+}

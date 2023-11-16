@@ -4,9 +4,15 @@
 //
 
 #include "string.hpp"
+#include <sstream>
 
 namespace hlp {
-    std::vector<std::string> split(char delimiter) {
-        return std::vector<std::string>();
+    std::vector<std::string> split(std::stringstream stream, char delimiter) {
+        std::vector<std::string> entries{ };
+        std::string entry{ };
+        while (std::getline(stream, entry, delimiter)) {
+            entries.push_back(entry);
+        }
+        return entries;
     }
 }

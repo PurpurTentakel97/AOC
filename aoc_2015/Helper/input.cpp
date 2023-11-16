@@ -18,7 +18,6 @@ namespace hlp {
 			std::string input_str{};
 			std::cin >> input_str;
 
-
 			try {
 				input = std::stoi(input_str);
 				valid_input = true;
