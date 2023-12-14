@@ -9,8 +9,8 @@
 
 namespace hlp {
     std::vector<std::string> split(std::stringstream stream, char delimiter) {
-        std::vector<std::string> entries{ };
-        std::string entry{ };
+        std::vector<std::string> entries{};
+        std::string entry{};
         while (std::getline(stream, entry, delimiter)) {
             entries.push_back(entry);
         }
@@ -18,19 +18,25 @@ namespace hlp {
     }
 
     std::string flip(std::string s) {
-        std::reverse(s.begin(),s.end());
+        std::reverse(s.begin(), s.end());
         return s;
     }
 
-    void ltrim(std::string& s) {
-        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](auto const& ch) { return !std::isspace(ch); }));
+    bool is_multiple_digit(const std::string &s) {
+        return std::all_of(s.begin(), s.end(), [](char const &c) -> bool {
+            return std::isdigit(static_cast<unsigned char>(c));
+        });
     }
 
-    void rtrim(std::string& s) {
-        s.erase(std::find_if(s.rbegin(), s.rend(), [](auto const& ch) {return !std::isspace(ch); }).base(), s.end());
+    void ltrim(std::string &s) {
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](auto const &ch) { return !std::isspace(ch); }));
     }
 
-    void trim(std::string& s) {
+    void rtrim(std::string &s) {
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](auto const &ch) { return !std::isspace(ch); }).base(), s.end());
+    }
+
+    void trim(std::string &s) {
         ltrim(s);
         rtrim(s);
     }
