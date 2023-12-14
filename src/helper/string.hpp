@@ -11,6 +11,8 @@
 namespace hlp {
 	[[nodiscard]] std::vector<std::string> split(std::stringstream entry, char delimiter);
 
+    [[nodiscard]] std::string flip(std::string s);
+
 	void ltrim(std::string& s);
 	void rtrim(std::string& s);
 	void trim (std::string& s);

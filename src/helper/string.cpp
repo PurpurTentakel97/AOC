@@ -17,6 +17,11 @@ namespace hlp {
         return entries;
     }
 
+    std::string flip(std::string s) {
+        std::reverse(s.begin(),s.end());
+        return s;
+    }
+
     void ltrim(std::string& s) {
         s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](auto const& ch) { return !std::isspace(ch); }));
     }
