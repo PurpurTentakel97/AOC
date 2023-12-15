@@ -12,12 +12,14 @@
 #include <sstream>
 #include <cassert>
 #include <ranges>
+#include <limits>
 
 static const inline std::string title{"Day 5: If You Give A Seed A Fertilizer"};
 static const inline std::string directory{R"(src\2023\input_23\day_23_05\)"};
 
 struct Seed final {
-    usize seed, soil, fertilizer, water, light, temperature, humidity, location;
+    usize seed, soil, fertilizer, water, light, temperature, humidity;
+    usize location{};
 
     void print() const {
         hlp::print(hlp::PrintType::DEBUG, "Seed:");
@@ -54,7 +56,7 @@ private:
     std::vector<MapEntry> entries{};
 public:
 
-    void add_entry(MapEntry entry){
+    void add_entry(MapEntry entry) {
         entries.push_back(entry);
     }
 
@@ -69,10 +71,11 @@ public:
                 return e.destination + offset;
             }
         }
+        return n;
     }
 };
 
-struct InputData final{
+struct InputData final {
     std::vector<Map> maps;
     std::vector<Seed> seeds;
 };
@@ -84,7 +87,11 @@ struct InputData final{
     for (auto const &ch: numbers) {
         if (hlp::is_multiple_digit(ch)) {
             auto seed = Seed{};
-            seed.seed = std::stoi(ch);
+            std::stringstream ss{};
+            ss << ch;
+            usize num{};
+            ss >> num;
+            seed.seed = num;
             seeds.push_back(seed);
         }
     }
@@ -114,10 +121,14 @@ struct InputData final{
                 break;
             }
 
-            entries.push_back(std::stoi(number));
+            std::stringstream ss{};
+            ss << number;
+            usize num{};
+            ss >> num;
+            entries.push_back(num);
         }
 
-        if (not entries.empty()){
+        if (not entries.empty()) {
             auto entry = MapEntry(entries);
             map.add_entry(entry);
         }
@@ -134,12 +145,61 @@ struct InputData final{
     return {maps, seeds};
 }
 
+[[nodiscard]] static inline std::vector<Seed> map_seeds(InputData const &input) {
+    std::vector<Seed> seeds{input.seeds};
+
+    assert(not seeds.empty());
+
+    auto const &look_up{[input](usize &origin, usize &destination, Map const& map) {
+        destination = map.lookup(origin);
+    }};
+
+    for (auto &seed: seeds) {
+        // @formatter:off
+        look_up(seed.seed,        seed.soil,        input.maps[0]);
+        look_up(seed.soil,        seed.fertilizer,  input.maps[1]);
+        look_up(seed.fertilizer,  seed.water,       input.maps[2]);
+        look_up(seed.water,       seed.light,       input.maps[3]);
+        look_up(seed.light,       seed.temperature, input.maps[4]);
+        look_up(seed.temperature, seed.humidity,    input.maps[5]);
+        look_up(seed.humidity,    seed.location,    input.maps[6]);
+        // @formatter:on
+    }
+
+    return seeds;
+}
+
+[[nodiscard]] static inline Seed lowest_seed(std::vector<Seed> const &seeds) {
+    Seed lowest{};
+    lowest.location = std::numeric_limits<usize>::max();
+
+    for (auto const &seed: seeds) {
+        if (seed.location < lowest.location) {
+            lowest = seed;
+        }
+    }
+    return lowest;
+}
+
 void day_23_05() {
     using namespace hlp;
+    // test 1
     print(PrintType::TEST_1, title);
 
     auto const input_test_1{load(directory + "test1.txt")};
     auto const data_test_1{parse(input_test_1)};
+    auto const seeds_test_1{map_seeds(data_test_1)};
+    auto const lowest_location_test_1{lowest_seed(seeds_test_1)};
 
-    compare_and_print(35, 0);
+    compare_and_print(usize{35}, lowest_location_test_1.location);
+
+    // task
+    print(PrintType::TASK, title);
+
+    auto const input{load(directory + "input.txt")};
+    auto const data{parse(input)};
+    auto const seeds{map_seeds(data)};
+    auto const lowest_location{lowest_seed(seeds)};
+
+    print(PrintType::RESULT, "the nearest location ist: {}", lowest_location.location);
 }
