@@ -10,3 +10,4 @@
 #include "day_23_03/day_23_03.hpp"
 #include "day_23_04/day_23_04.hpp"
 #include "day_23_05/day_23_05.hpp"
+#include "day_23_06/day_23_06.hpp"
