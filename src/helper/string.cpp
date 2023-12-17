@@ -9,8 +9,8 @@
 
 namespace hlp {
     std::vector<std::string> split(std::stringstream stream, char delimiter) {
-        std::vector<std::string> entries{};
-        std::string entry{};
+        std::vector<std::string> entries{ };
+        std::string entry{ };
         while (std::getline(stream, entry, delimiter)) {
             entries.push_back(entry);
         }
@@ -23,6 +23,9 @@ namespace hlp {
     }
 
     bool is_multiple_digit(const std::string &s) {
+        if (s.empty()) {
+            return false;
+        }
         return std::all_of(s.begin(), s.end(), [](char const &c) -> bool {
             return std::isdigit(static_cast<unsigned char>(c));
         });
