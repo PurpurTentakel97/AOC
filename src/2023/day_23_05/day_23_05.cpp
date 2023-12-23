@@ -193,6 +193,9 @@ void day_23_05() {
 
     compare_and_print(usize{35}, lowest_location_test_1.location);
 
+    // test2
+    print(PrintType::TEST_2, "not able to solve");
+
     // task
     print(PrintType::TASK, title);
 
