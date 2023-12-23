@@ -148,11 +148,13 @@ static inline std::vector<Card> parse(std::string const &input) {
         usize value;
         s >> value;
 
-        cards.emplace_back(
+        Card const card{
                 value,
                 i[0],
                 lookup_cards(i[0])
-        );
+        };
+
+        cards.push_back(card);
     }
     return cards;
 }
