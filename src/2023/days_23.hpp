@@ -11,3 +11,4 @@
 #include "day_23_04/day_23_04.hpp"
 #include "day_23_05/day_23_05.hpp"
 #include "day_23_06/day_23_06.hpp"
+#include "day_23_07/day_23_07.hpp"
