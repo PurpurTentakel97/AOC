@@ -11,7 +11,7 @@
 using function_map_ty = std::unordered_map<int, std::function<void()>>;
 
 static inline function_map_ty map_day_15 {
-	{  1, day_15_01 },
+	{  1, d_15_01::day_15_01 },
 	{  2, day_15_02 },
 	{  3, day_15_03 },
 };
