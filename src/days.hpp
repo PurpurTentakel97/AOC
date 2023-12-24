@@ -22,5 +22,5 @@ static inline function_map_ty map_day_23 {
 	{  3, d_23_03::day_23_03 },
 	{  4, d_23_04::day_23_04 },
 	{  5, d_23_05::day_23_05 },
-	{  6, day_23_06 },
+	{  6, d_23_06::day_23_06 },
 };
