@@ -13,6 +13,8 @@ add_library(2023
             day_23_05/day_23_05.cpp
             day_23_06/day_23_06.hpp
             day_23_06/day_23_06.cpp
+            day_23_07/day_23_07.hpp
+            day_23_07/day_23_07.cpp
 )
 
 target_link_libraries(2023 PRIVATE HELPER)
