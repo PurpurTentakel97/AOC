@@ -15,21 +15,36 @@
 #include <stdexcept>
 #include <sstream>
 
-static inline const std::string title{ "Day 7: Camel Cards" };
-static inline const std::string directory{ R"(src\2023\input_23\day_23_07\{})" };
+namespace d_23_07 {
+    static inline const std::string title{ "Day 7: Camel Cards" };
+    static inline const std::string directory{ R"(src\2023\input_23\day_23_07\{})" };
 
-enum class CardType {
-    HighCard,
-    OnePair,
-    TwoPair,
-    Three,
-    FullHouse,
-    Four,
-    Five,
-};
+    enum class CardType {
+        Default,
+        HighCard,
+        OnePair,
+        TwoPair,
+        Three,
+        FullHouse,
+        Four,
+        Five,
+    };
 
-enum class HandCard {
-    // @formatter:off
+    static const inline std::unordered_map<CardType, std::string> type_string_lookup{
+            // @formatter:off
+            { CardType::Default,   "CardType::Default"   },
+            { CardType::HighCard,  "CardType::HighCard"  },
+            { CardType::OnePair,   "CardType::OnePair"   },
+            { CardType::TwoPair,   "CardType::TwoPair"   },
+            { CardType::Three,     "CardType::Three"     },
+            { CardType::FullHouse, "CardType::FullHouse" },
+            { CardType::Four,      "CardType::Four"      },
+            { CardType::Five,      "CardType::Five"      },
+            // @formatter:on
+    };
+
+    enum class HandCard {
+        // @formatter:off
     _2,
     _3,
     _4,
@@ -44,10 +59,10 @@ enum class HandCard {
      K,
      A,
     // @formatter:on
-};
+    };
 
-static const inline std::unordered_map<char, HandCard> char_hand_lookup{
-        // @formatter:off
+    static const inline std::unordered_map<char, HandCard> char_hand_lookup{
+            // @formatter:off
         { '2', HandCard::_2 },
         { '3', HandCard::_3 },
         { '4', HandCard::_4 },
@@ -62,9 +77,9 @@ static const inline std::unordered_map<char, HandCard> char_hand_lookup{
         { 'K', HandCard::K  },
         { 'A', HandCard::A  },
     // @formatter:on
-};
-static const inline std::unordered_map<HandCard, char> hand_char_lookup{
-        // @formatter:off
+    };
+    static const inline std::unordered_map<HandCard, char> hand_char_lookup{
+            // @formatter:off
         { HandCard::_2, '2' },
         { HandCard::_3, '3' },
         { HandCard::_4, '4' },
@@ -79,96 +94,132 @@ static const inline std::unordered_map<HandCard, char> hand_char_lookup{
         { HandCard::K , 'K' },
         { HandCard::A , 'A' },
         // @formatter:on
-};
+    };
 
-static constexpr inline std::array<HandCard, 5> lookup_cards(std::string const &input) {
-    assert(input.size() == 5);
-    std::array<HandCard, 5> result{ };
+    using Hand = std::array<HandCard, 5>;
 
-    for (int i = 0; i < input.size(); ++i) {
-        if (not char_hand_lookup.contains(input[i])) {
-            throw std::runtime_error{ hlp::str("hand lookup does not contain '{}'", input[i]) };
-        }
-        result[i] = char_hand_lookup.at(input[i]);
-    }
-
-    return result;
-}
-
-struct Card final {
-    usize bid;
-    std::string hand_s;
-    std::array<HandCard, 5> hand_a;
-
-    void print() const {
-        hlp::print(hlp::PrintType::DEBUG,
-                   "Card: bid: {} | hand_s: {} | hand_a: {}{}{}{}{}",
-                   bid,
-                   hand_s,
-                   hand_char_lookup.at(hand_a[0]),
-                   hand_char_lookup.at(hand_a[1]),
-                   hand_char_lookup.at(hand_a[2]),
-                   hand_char_lookup.at(hand_a[3]),
-                   hand_char_lookup.at(hand_a[4])
+    static inline std::string hand_to_string(Hand const &hand) {
+        return hlp::str("{}{}{}{}{}",
+                        hand_char_lookup.at(hand[0]),
+                        hand_char_lookup.at(hand[1]),
+                        hand_char_lookup.at(hand[2]),
+                        hand_char_lookup.at(hand[3]),
+                        hand_char_lookup.at(hand[4])
         );
     }
-};
 
-static inline std::vector<Card> parse(std::string const &input) {
-    std::vector<Card> cards{ };
-    std::stringstream ss{ input };
-    std::string out{ };
+    static constexpr inline Hand lookup_cards(std::string const &input) {
+        assert(input.size() == 5);
+        std::array<HandCard, 5> result{ };
 
-    while (std::getline(ss, out)) {
-        hlp::trim(out);
-        if (out.empty()) {
-            continue;
+        for (int i = 0; i < input.size(); ++i) {
+            if (not char_hand_lookup.contains(input[i])) {
+                throw std::runtime_error{ hlp::str("hand lookup does not contain '{}'", input[i]) };
+            }
+            result[i] = char_hand_lookup.at(input[i]);
         }
 
-        auto i{ hlp::split(std::stringstream{ out }, ' ') };
-        assert(i.size() == 2);
-        hlp::trim(i[0]);
-        hlp::trim(i[1]);
-        if (not hlp::is_multiple_digit(i[1])) {
-            std::runtime_error{ hlp::str("error parsing number: '{}' is no number", i[2]) };
+        return result;
+    }
+
+    static inline CardType define_card_type(std::array<HandCard, 5> const &hand) {
+        std::unordered_map<HandCard, usize> cards{ };
+        for (auto const &h : hand) {
+            if (not cards.contains(h)) {
+                cards[h] = 1;
+            } else {
+                ++cards[h];
+            }
         }
 
-        hlp::print(hlp::PrintType::DEBUG, "bid: {}", std::stoi(i[1]));
-        hlp::print(hlp::PrintType::DEBUG, "hand_s: {}", i[0]);
-        auto const e{ lookup_cards(i[0]) };
-        hlp::print(hlp::PrintType::DEBUG, "hand_a: {}{}{}{}{}",
-                   hand_char_lookup.at(e[0]),
-                   hand_char_lookup.at(e[1]),
-                   hand_char_lookup.at(e[2]),
-                   hand_char_lookup.at(e[3]),
-                   hand_char_lookup.at(e[4])
-        );
-
-        std::stringstream s{ i[1] };
-        usize value;
-        s >> value;
-
-        Card const card{
-                value,
-                i[0],
-                lookup_cards(i[0])
-        };
-
-        cards.push_back(card);
-    }
-    return cards;
-}
-
-
-void day_23_07() {
-    using namespace hlp;
-
-    // test 1
-    auto const input_test_1{ load(str(directory, "test1.txt")) };
-    auto const cards_test_1{ parse(input_test_1) };
-
-    for (auto const &c : cards_test_1) {
-        // c.print();
+        switch (cards.size()) {
+            case 1:
+                return CardType::Five;
+            case 2:
+                for (auto const &[type, count] : cards) {
+                    if (count == 4) {
+                        return CardType::Four;
+                    }
+                }
+                return CardType::FullHouse;
+            case 3:
+                for (auto const &[type, count] : cards) {
+                    if (count == 3) {
+                        return CardType::Three;
+                    }
+                }
+                return CardType::TwoPair;
+            case 4:
+                return CardType::OnePair;
+            case 5:
+                return CardType::HighCard;
+        }
+        throw std::runtime_error{ hlp::str("no card_type found: {}", hand_to_string(hand)) };
     }
 
+    struct Card final {
+        usize bid;
+        std::string hand_s;
+        std::array<HandCard, 5> hand_a;
+        CardType type{ CardType::Default };
+
+        void print() const {
+            hlp::print(hlp::PrintType::DEBUG,
+                       "Card: bid: {} | hand_s: {} | hand_a: {} | type: {}",
+                       bid,
+                       hand_s,
+                       hand_to_string(hand_a),
+                       type_string_lookup.at(type)
+            );
+        }
+    };
+
+    static inline std::vector<Card> parse(std::string const &input) {
+        std::vector<Card> cards{ };
+        std::stringstream ss{ input };
+        std::string out{ };
+
+        while (std::getline(ss, out)) {
+            hlp::trim(out);
+            if (out.empty()) {
+                continue;
+            }
+
+            auto i{ hlp::split(std::stringstream{ out }, ' ') };
+            assert(i.size() == 2);
+            hlp::trim(i[0]);
+            hlp::trim(i[1]);
+            if (not hlp::is_multiple_digit(i[1])) {
+                throw std::runtime_error{ hlp::str("error parsing number: '{}' is no number", i[2]) };
+            }
+
+            std::stringstream s{ i[1] };
+            usize value;
+            s >> value;
+
+            auto const hand{ lookup_cards(i[0]) };
+
+            cards.emplace_back(
+                    value,
+                    i[0],
+                    hand,
+                    define_card_type(hand)
+            );
+        }
+        return cards;
+    }
+
+
+    void day_23_07() {
+        using namespace hlp;
+
+        // test 1
+        auto const input_test_1{ load(str(directory, "test1.txt")) };
+        auto const cards_test_1{ parse(input_test_1) };
+
+        for (auto const &c : cards_test_1) {
+            c.print();
+        }
+
+    }
 }
