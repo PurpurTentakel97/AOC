@@ -7,6 +7,7 @@
 #include "types.hpp"
 #include "string.hpp"
 #include "load.hpp"
+#include "compare.hpp"
 
 #include <string>
 #include <unordered_map>
@@ -14,6 +15,7 @@
 #include <cassert>
 #include <stdexcept>
 #include <sstream>
+#include <algorithm>
 
 namespace d_23_07 {
     static inline const std::string title{ "Day 7: Camel Cards" };
@@ -209,17 +211,52 @@ namespace d_23_07 {
         return cards;
     }
 
+    static void sort_cards(std::vector<Card> &cards) {
+        auto const rule{ [](Card const &lhs, Card const &rhs) -> bool {
+            if (lhs.type != rhs.type){
+                return lhs.type < rhs.type;
+            }
+            assert(lhs.hand_a.size() == 5);
+            assert(rhs.hand_a.size() == 5);
+            for (usize i = 0; i < lhs.hand_a.size(); ++i){
+                if (lhs.hand_a[i] != rhs.hand_a[i]){
+                    return lhs.hand_a[i] < rhs.hand_a[i];
+                }
+            }
+            throw std::runtime_error{"same card"};
+        }};
+        std::sort(cards.begin(), cards.end(), rule);
+    }
+
+    static usize multiply(std::vector<Card> const &cards) {
+        usize count{ };
+        for (usize i = 0; i < cards.size(); ++i) {
+            count += (i + 1) * cards[i].bid;
+        }
+        return count;
+    }
 
     void day_23_07() {
         using namespace hlp;
 
         // test 1
+        print(PrintType::TEST_1, title);
+
         auto const input_test_1{ load(str(directory, "test1.txt")) };
-        auto const cards_test_1{ parse(input_test_1) };
+        auto cards_test_1{ parse(input_test_1) };
+        sort_cards(cards_test_1);
+        auto const count_test_1{ multiply(cards_test_1) };
 
-        for (auto const &c : cards_test_1) {
-            c.print();
-        }
+        compare_and_print(usize{ 6440 }, count_test_1);
 
+        // task
+        print(PrintType::TASK, title);
+
+        auto const input{load(str(directory,"input.txt"))};
+        auto cards{ parse(input)};
+        sort_cards(cards);
+        auto const count{ multiply(cards)};
+
+        print(PrintType::RESULT, "the total winnings are: {}", count);
     }
 }
