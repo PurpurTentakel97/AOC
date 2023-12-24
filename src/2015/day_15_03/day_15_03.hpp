@@ -5,5 +5,6 @@
 
 #pragma once
 
-
-void day_15_03();
+namespace d_15_03 {
+    void day_15_03();
+}
